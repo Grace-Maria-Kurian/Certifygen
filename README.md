@@ -4,4 +4,4 @@ Develop an application that generates personalized certificates for events or co
 Template selection.
 Form to enter personalization details.
 Generate and download the certificate.
-We have completed.
+
