@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CertifyGen - Certificate Generator</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <title>Sign In - CertifyGen</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,28 +11,26 @@
             color: #333;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
         .container {
-            max-width: 800px;
-            margin: 0 auto;
+            width: 300px;
             padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        form {
             background-color: #fff;
-            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
         label {
             font-weight: bold;
-            color: #555;
         }
-        select, input[type="text"], textarea {
+        input[type="text"], input[type="password"], button {
             width: 100%;
             padding: 8px;
             margin: 6px 0;
@@ -46,7 +42,6 @@
         button {
             background-color: #4CAF50;
             color: white;
-            padding: 10px 20px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -59,58 +54,33 @@
 </head>
 <body>
     <div class="container">
-        <h1>CertifyGen - Certificate Generator</h1>
-        <form id="certificateForm" onsubmit="generateCertificate(event)">
-            <label for="recipientName">Recipient's Name:</label>
-            <input type="text" id="recipientName" name="recipientName" required><br>
+        <h1>Sign In to CertifyGen</h1>
+        <form id="signInForm" onsubmit="signIn(event)">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br>
 
-            <label for="certificateReason">Purpose of Certificate:</label><br>
-            <textarea id="certificateReason" name="certificateReason" rows="4" required></textarea><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br>
 
-            <label for="templateSelect">Choose Template:</label>
-            <select id="templateSelect" name="templateSelect">
-                <option value="template1">Template 1</option>
-                <option value="template2">Template 2</option>
-            </select><br>
-
-            <label for="fontSelect">Choose Font:</label>
-            <select id="fontSelect" name="fontSelect">
-                <option value="Arial">Arial</option>
-                <option value="Times New Roman">Times New Roman</option>
-            </select><br>
-
-            <label for="textColor">Choose Text Color:</label>
-            <input type="color" id="textColor" name="textColor" value="#000000"><br>
-
-            <label for="backgroundColor">Choose Background Color:</label>
-            <input type="color" id="backgroundColor" name="backgroundColor" value="#ffffff"><br>
-
-            <button type="submit">Generate Certificate</button>
+            <button type="submit">Sign In</button>
         </form>
     </div>
 
     <script>
-        async function generateCertificate(event) {
+        function signIn(event) {
             event.preventDefault();
 
-            const recipientName = document.getElementById("recipientName").value;
-            const certificateReason = document.getElementById("certificateReason").value;
-            const templateSelect = document.getElementById("templateSelect").value;
-            const fontSelect = document.getElementById("fontSelect").value;
-            const textColor = document.getElementById("textColor").value;
-            const backgroundColor = document.getElementById("backgroundColor").value;
+            // Here, you can add your authentication logic.
+            // For simplicity, let's assume any non-empty username and password combination is valid.
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
 
-            // Construct HTML content for the certificate
-            const htmlContent = `
-                <div style="text-align: center; background-color: ${backgroundColor}; padding: 20px;">
-                    <h1 style="color: ${textColor};">Certificate of Achievement</h1>
-                    <p style="color: ${textColor};">Recipient's Name: ${recipientName}</p>
-                    <p style="color: ${textColor};">Purpose of Certificate: ${certificateReason}</p>
-                </div>
-            `;
-
-            // Convert HTML content to PDF
-            html2pdf().from(htmlContent).save(`Certificate_${recipientName}.pdf`);
+            if (username.trim() !== "" && password.trim() !== "") {
+                // Redirect to the certificate generator page
+                window.location.href = "certificate_generator.html";
+            } else {
+                alert("Invalid username or password. Please try again.");
+            }
         }
     </script>
 </body>
