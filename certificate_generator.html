@@ -51,6 +51,7 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
+            margin-right: 10px;
         }
         button:hover {
             background-color: #45a049;
@@ -72,6 +73,10 @@
             color: #333;
             z-index: 1;
         }
+        .social-share {
+            text-align: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -89,6 +94,11 @@
 
             <button type="submit">Generate Certificate</button>
         </form>
+        <div class="social-share" id="socialShare">
+            <button id="shareFacebook">Share on Facebook</button>
+            <button id="shareTwitter">Share on Twitter</button>
+            <button id="convertPDF">Convert to PDF</button>
+        </div>
     </div>
 
     <script>
@@ -122,9 +132,32 @@
                 `;
 
                 // Convert HTML content to PDF
-                html2pdf().from(htmlContent).save(`Certificate_${recipientName}.pdf`);
+                const pdfOptions = {
+                    margin: 0.5,
+                    filename: `Certificate_${recipientName}.pdf`,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+
+                html2pdf().set(pdfOptions).from(htmlContent).save();
+
+                // Show social sharing buttons
+                document.getElementById("socialShare").style.display = "block";
             };
         }
+
+        // Function to share on Facebook
+        document.getElementById("shareFacebook").addEventListener("click", function () {
+            const url = "https://www.facebook.com/sharer/sharer.php?u=" + window.location.href;
+            window.open(url, '_blank');
+        });
+
+        // Function to share on Twitter
+        document.getElementById("shareTwitter").addEventListener("click", function () {
+            const url = "https://twitter.com/intent/tweet?url=" + window.location.href + "&text=Check%20out%20this%20certificate!";
+            window.open(url, '_blank');
+        });
     </script>
 </body>
 </html>
