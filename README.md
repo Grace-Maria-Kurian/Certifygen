@@ -1,7 +1,6 @@
 # Certigen
-Develop an application that generates personalized certificates for events or courses, which users can download or share.
+Allows user to enter login details.
+Once signed in, the user can enter the required details and add a personalized template.
+With the above given details, the website will generate a pdf for providing the neccessary certification.
 
-Template selection.
-Form to enter personalization details.
-Generate and download the certificate.
 
